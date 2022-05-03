@@ -1,3 +1,4 @@
+import { InvoicesModule } from './../invoices/invoices.module';
 import { MaterialModule } from './../Shared/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -19,7 +20,8 @@ import { DashboardComponent } from './dashboard.component';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    MaterialModule
+    MaterialModule,
+    InvoicesModule
   ]
 })
 export class DashboardModule { }

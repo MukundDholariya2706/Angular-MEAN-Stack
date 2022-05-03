@@ -1,3 +1,4 @@
+import { InvoiceListingComponent } from './../invoices/components/invoice-listing/invoice-listing.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -12,6 +13,10 @@ const routes: Routes = [
         path: '',
         component: MainContentComponent,
       },
+      {
+        path: 'invoices',
+        component: InvoiceListingComponent
+      }
     ],
   },
 ];

@@ -10,6 +10,17 @@ export class SideNavComponent implements OnInit {
     `(max-width: ${MAX_WIDTH_BREAKPOINT}px)`
   );
 
+  links = [
+    {
+      name: 'Invoices',
+      url: 'invoices',
+    },
+    {
+      name: 'Clients',
+      url: 'clients',
+    },
+  ];
+
   constructor(zone: NgZone) {
     this.mediaMatcher.addListener((mql) => {
       zone.run(
