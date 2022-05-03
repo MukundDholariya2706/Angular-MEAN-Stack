@@ -1,3 +1,4 @@
+import { MaterialModule } from './../Shared/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -17,7 +18,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
   ],
   imports: [
     CommonModule,
-    InvoiceBuilderRoutingModule
+    InvoiceBuilderRoutingModule,
+    MaterialModule
   ]
 })
 export class InvoiceBuilderModule { }
