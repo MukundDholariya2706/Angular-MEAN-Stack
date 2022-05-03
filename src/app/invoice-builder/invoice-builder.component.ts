@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
     <p>
       invoice-builder works!
     </p>
+    <router-outlet></router-outlet>
   `,
   styles: [
   ]
