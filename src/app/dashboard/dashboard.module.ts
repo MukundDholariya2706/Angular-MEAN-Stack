@@ -1,3 +1,4 @@
+import { ClientsModule } from './../clients/clients.module';
 import { InvoicesModule } from './../invoices/invoices.module';
 import { MaterialModule } from './../Shared/material.module';
 import { NgModule } from '@angular/core';
@@ -21,7 +22,8 @@ import { DashboardComponent } from './dashboard.component';
     CommonModule,
     DashboardRoutingModule,
     MaterialModule,
-    InvoicesModule
+    InvoicesModule,
+    ClientsModule
   ]
 })
 export class DashboardModule { }
