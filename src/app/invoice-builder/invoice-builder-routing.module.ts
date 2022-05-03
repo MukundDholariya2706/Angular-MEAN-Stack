@@ -1,10 +1,16 @@
+import { InvoiceBuilderComponent } from './invoice-builder.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component: InvoiceBuilderComponent,
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class InvoiceBuilderRoutingModule { }
+export class InvoiceBuilderRoutingModule {}
