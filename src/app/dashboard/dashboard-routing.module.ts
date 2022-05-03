@@ -1,12 +1,12 @@
 import { MainContentComponent } from './components/main-content/main-content.component';
-import { InvoiceBuilderComponent } from './invoice-builder.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: InvoiceBuilderComponent,
+    component: DashboardComponent,
     children: [
       {
         path: '',
@@ -20,4 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class InvoiceBuilderRoutingModule {}
+export class DashboardRoutingModule {}

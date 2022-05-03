@@ -2,24 +2,24 @@ import { MaterialModule } from './../Shared/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { InvoiceBuilderRoutingModule } from './invoice-builder-routing.module';
-import { InvoiceBuilderComponent } from './invoice-builder.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { DashboardComponent } from './dashboard.component';
 
 
 @NgModule({
   declarations: [
-    InvoiceBuilderComponent,
+    DashboardComponent,
     MainContentComponent,
     SideNavComponent,
     ToolbarComponent
   ],
   imports: [
     CommonModule,
-    InvoiceBuilderRoutingModule,
+    DashboardRoutingModule,
     MaterialModule
   ]
 })
-export class InvoiceBuilderModule { }
+export class DashboardModule { }
