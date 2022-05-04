@@ -1,4 +1,19 @@
-table.mat-table {
+table {
     width: 100%;
-    border-spacing: 0;
+  }
+
+.mat-table {
+   overflow: auto;
+   max-height: 500px;
+}
+
+.menu-bar{
+    position: absolute;
+    right: 60px;
+    color: white;
+    background-color: #3f51b5;
+}
+
+.menu-item-action {
+    padding-left: 30px;
 }

@@ -1,3 +1,4 @@
+import { InvoiceFormComponent } from './../invoices/components/invoice-form/invoice-form.component';
 import { ClientListingComponent } from './../clients/components/client-listing/client-listing.component';
 import { InvoiceListingComponent } from './../invoices/components/invoice-listing/invoice-listing.component';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: 'invoices',
         component: InvoiceListingComponent
+      },
+      {
+        path: 'invoices/new',
+        component: InvoiceFormComponent
       },
       {
         path: 'clients',
