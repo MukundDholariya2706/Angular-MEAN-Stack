@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Invoice } from './../../models/invoice';
 import { InvoiceService } from './../../services/invoice.service';
 import { Component, OnInit } from '@angular/core';
-
+// import { remove } from 'loadsh';
 @Component({
   selector: 'app-invoice-listing',
   templateUrl: './invoice-listing.component.html',
@@ -28,14 +28,7 @@ export class InvoiceListingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.invoiceService.getInvoices().subscribe(
-      (data) => {
-        this.dataSource = data;
-      },
-      (err) => {
-        this.errorHandler(err, 'Failed to fetch invoices');
-      }
-    );
+  this.getInvoices();
   }
 
   saveBtnHandler() {
@@ -47,6 +40,7 @@ export class InvoiceListingComponent implements OnInit {
     this.invoiceService.deleteInvoice(id).subscribe(
       (data) => {
         this._snackBar.open('Invoice deleted', 'Success', { duration: 2000 });
+        this.getInvoices();
       },
       (err) => {
         this.errorHandler(err, 'Failed to delete invoice');
@@ -60,4 +54,16 @@ export class InvoiceListingComponent implements OnInit {
       duration: 2000,
     });
   }
+
+  getInvoices(){
+    this.invoiceService.getInvoices().subscribe(
+      (data) => {
+        this.dataSource = data;
+      },
+      (err) => {
+        this.errorHandler(err, 'Failed to fetch invoices');
+      }
+    );
+  }
+  
 }
