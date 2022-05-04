@@ -1,3 +1,41 @@
-<mat-card>
-    <h3>Invoice listing</h3>
-</mat-card>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+ 
+  <!-- Item Column -->
+  <ng-container matColumnDef="item">
+    <th mat-header-cell *matHeaderCellDef>Item</th>
+    <td mat-cell *matCellDef="let invoice">{{ invoice.item }}</td>
+  </ng-container>
+
+  <!-- Date Column -->
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef>Date</th>
+    <td mat-cell *matCellDef="let invoice">{{ invoice.date | date }}</td>
+  </ng-container>
+
+  <!-- Due Column -->
+  <ng-container matColumnDef="due">
+    <th mat-header-cell *matHeaderCellDef>Due</th>
+    <td mat-cell *matCellDef="let invoice">{{ invoice.due | date }}</td>
+  </ng-container>
+
+  <!-- Qty Column -->
+  <ng-container matColumnDef="qty">
+    <th mat-header-cell *matHeaderCellDef>Qty</th>
+    <td mat-cell *matCellDef="let invoice">{{ invoice.qty }}</td>
+  </ng-container>
+
+  <!-- Rate Column -->
+  <ng-container matColumnDef="rate">
+    <th mat-header-cell *matHeaderCellDef>Rate</th>
+    <td mat-cell *matCellDef="let invoice">{{ invoice.rate }}</td>
+  </ng-container>
+
+  <!-- Tax Column -->
+  <ng-container matColumnDef="tax">
+    <th mat-header-cell *matHeaderCellDef>Tax</th>
+    <td mat-cell *matCellDef="let invoice">{{ invoice.tax }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
