@@ -91,6 +91,7 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
           perPage: this.paginator.pageSize,
           sortField: this.sort.active,
           sortDir: this.sort.direction,
+          filter: ''
         })
       }),
       map(data => {
@@ -108,10 +109,14 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
     })
   }
 
+  //save button function
+
   saveBtnHandler() {
     // this.router.navigate(['dashboard','invoices','new']);
     this.router.navigate(['dashboard/invoices/new']);
   }
+
+  //delete button function
 
   deleteBtnHandler(id: string) {
     this.invoiceService.deleteInvoice(id).subscribe(
@@ -125,9 +130,13 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
     );
   }
 
+  // edit button function
+
   editBtnHandler(id: string) {
     this.router.navigate([`dashboard/invoices/${id}`]);
   }
+
+  //errorhandler funtion
 
   private errorHandler(error: any, message: string) {
     this.resultLoadding = false;
@@ -137,6 +146,30 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
     });
   }
 
+  // filter function
+
+  filterText(event: any){
+    let filterValue = event.target.value;
+    filterValue = filterValue.trim();  //for extra spaces
+    this.resultLoadding = true;     //spinner call
+    this.paginator.pageIndex = 0;
+
+    this.invoiceService.getInvoices({
+      page: this.paginator.pageIndex,
+      perPage: this.paginator.pageSize,
+      sortField: this.sort.active,
+      sortDir: this.sort.direction,
+      filter: filterValue
+    }).subscribe(data => {
+      this.dataSource.data = data.docs;
+      this.resultsLength = data.total;
+      this.resultLoadding = false;
+    },
+    err => this.errorHandler(err, 'Failed to filter invoices'))
+    
+  }
+
+  //code not use
   populateInvoices() {
     this.resultLoadding = true;
     this.invoiceService
@@ -159,4 +192,5 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
         }
       );
   }
+
 }
