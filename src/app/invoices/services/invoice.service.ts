@@ -1,4 +1,4 @@
-import { Invoice } from './../models/invoice';
+import { Invoice, InvoicePaginationRsp } from './../models/invoice';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -11,8 +11,8 @@ const BASE_URL = 'http://localhost:3000/api';
 export class InvoiceService {
   constructor(private http: HttpClient) {}
 
-  getInvoices(): Observable<Invoice[]> {
-    return this.http.get<Invoice[]>(`${BASE_URL}/invoices`);
+  getInvoices({page, perPage}: any): Observable<InvoicePaginationRsp> {
+    return this.http.get<InvoicePaginationRsp>(`${BASE_URL}/invoices?page=${page}&perPage=${perPage}`);
   }
 
   createInvoice(body: Invoice): Observable<Invoice> {

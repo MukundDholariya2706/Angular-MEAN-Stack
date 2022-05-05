@@ -68,3 +68,10 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+
+<mat-paginator pageIndex="0" #paginator [length]="resultsLength"
+[pageSize]="4"
+[pageSizeOptions]="[2, 3, 4]"
+aria-label="Select page">
+</mat-paginator>
+
