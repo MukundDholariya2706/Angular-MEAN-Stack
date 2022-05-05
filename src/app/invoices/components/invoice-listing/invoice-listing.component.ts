@@ -48,6 +48,10 @@ export class InvoiceListingComponent implements OnInit {
     );
   }
 
+  editBtnHandler(id:string){
+    this.router.navigate([`dashboard/invoices/${id}`]);
+  }
+
   private errorHandler(error: any, message: string) {
     console.error(error);
     this._snackBar.open(message, 'Error', {
@@ -65,5 +69,5 @@ export class InvoiceListingComponent implements OnInit {
       }
     );
   }
-  
+
 }

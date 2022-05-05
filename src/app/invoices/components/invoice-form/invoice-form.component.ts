@@ -1,4 +1,5 @@
-import { Router } from '@angular/router';
+import { Invoice } from './../../models/invoice';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InvoiceService } from './../../services/invoice.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,15 +12,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class InvoiceFormComponent implements OnInit {
   invoiceForm!: FormGroup;
+  private invoice!: Invoice;
   constructor(
     private fb: FormBuilder,
     private invoiceService: InvoiceService,
     private _snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.createForm();
+    this.setInvoiceToForm();
   }
 
   get f() {
@@ -50,6 +54,23 @@ export class InvoiceFormComponent implements OnInit {
         this.errorHandler(err, 'Failed to create Invoice');
       }
     );
+  }
+
+  private setInvoiceToForm() {
+    this.route.params.subscribe((params) => {
+      // console.log('id :>> ', id);
+      let id = params['id'];
+      if (!id) {
+        return;
+      }
+      this.invoiceService.getInvoice(id).subscribe(
+        (invoice) => {
+          this.invoice = invoice;
+          this.invoiceForm.patchValue(this.invoice);
+        },
+        (err) => this.errorHandler(err, 'Failed to get Invoice')
+      );
+    });
   }
 
   private errorHandler(error: any, message: string) {
