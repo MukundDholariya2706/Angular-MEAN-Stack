@@ -11,8 +11,12 @@ const BASE_URL = 'http://localhost:3000/api';
 export class InvoiceService {
   constructor(private http: HttpClient) {}
 
-  getInvoices({page, perPage}: any): Observable<InvoicePaginationRsp> {
-    return this.http.get<InvoicePaginationRsp>(`${BASE_URL}/invoices?page=${page}&perPage=${perPage}`);
+  getInvoices({page, perPage, sortField, sortDir}: any): Observable<InvoicePaginationRsp> {
+    let queryString = `${BASE_URL}/invoices?page=${page + 1}&perPage=${perPage}`;
+    if(sortField && sortDir){
+      queryString = `${queryString}&sortField=${sortField}&sortDir=${sortDir}`
+    }
+    return this.http.get<InvoicePaginationRsp>(queryString);
   }
 
   createInvoice(body: Invoice): Observable<Invoice> {
