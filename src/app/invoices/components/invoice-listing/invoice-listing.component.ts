@@ -22,6 +22,7 @@ export class InvoiceListingComponent implements OnInit {
   ];
   dataSource: Invoice[] = [];
   resultsLength = 0;
+  resultLoadding = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
@@ -32,14 +33,17 @@ export class InvoiceListingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     this.paginator.page.subscribe(
       (data) => {
+        this.resultLoadding = true;
         this.invoiceService
         .getInvoices({ page: ++data.pageIndex, perPage: data.pageSize })
         .subscribe((data) => {
           console.log(data);
           this.dataSource = data.docs;
           this.resultsLength = data.total;
+          this.resultLoadding = false;
         });
       },
       (err) => this.errorHandler(err, 'Failed to fetch invoice')
@@ -69,6 +73,7 @@ export class InvoiceListingComponent implements OnInit {
   }
 
   private errorHandler(error: any, message: string) {
+    this.resultLoadding = false;
     console.error(error);
     this._snackBar.open(message, 'Error', {
       duration: 2000,
@@ -76,6 +81,7 @@ export class InvoiceListingComponent implements OnInit {
   }
 
   populateInvoices() {
+    this.resultLoadding = true;
     this.invoiceService.getInvoices({ page: 1, perPage: 4 }).subscribe(
       (data) => {
         this.dataSource = data.docs;
@@ -83,6 +89,9 @@ export class InvoiceListingComponent implements OnInit {
       },
       (err) => {
         this.errorHandler(err, 'Failed to fetch invoices');
+      },
+      () => {
+        this.resultLoadding = false;
       }
     );
   }
