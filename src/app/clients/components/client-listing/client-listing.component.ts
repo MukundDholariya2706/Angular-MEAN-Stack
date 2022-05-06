@@ -14,6 +14,7 @@ import 'rxjs';
 export class ClientListingComponent implements OnInit {
   displayedColumns = ['firstName', 'lastName', 'email'];
   dataSource = new MatTableDataSource<Client>();
+  resultLoadding = false;
 
   constructor(
     private clientService: ClientService,
@@ -22,6 +23,7 @@ export class ClientListingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.resultLoadding = true;
     this.getClients();
   }
 
@@ -50,7 +52,8 @@ export class ClientListingComponent implements OnInit {
       (data) => {
         this.dataSource.data = data;
       },
-      (err) => console.error(err)
+      (err) => console.error(err),
+      () => this.resultLoadding = false
     );
   }
 
