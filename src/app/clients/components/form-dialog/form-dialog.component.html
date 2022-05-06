@@ -44,6 +44,6 @@
 </div>
 <br />
 <div mat-dialog-actions>
-    <button mat-raised-button cdkFocusInitial>Save</button>
+    <button mat-raised-button [mat-dialog-close]="clientForm.value" cdkFocusInitial [disabled]="clientForm.invalid" >Save</button>
   <button mat-raised-button (click)="onNoClick()">Cancel</button>
 </div>
