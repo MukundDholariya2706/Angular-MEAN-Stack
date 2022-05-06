@@ -169,7 +169,6 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
     
   }
 
-  //code not use
   populateInvoices() {
     this.resultLoadding = true;
     this.invoiceService
