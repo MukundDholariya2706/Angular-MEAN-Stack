@@ -12,7 +12,7 @@ import 'rxjs';
   styleUrls: ['./client-listing.component.scss'],
 })
 export class ClientListingComponent implements OnInit {
-  displayedColumns = ['firstName', 'lastName', 'email'];
+  displayedColumns = ['firstName', 'lastName', 'email', 'action'];
   dataSource = new MatTableDataSource<Client>();
   resultLoadding = false;
 
@@ -27,11 +27,17 @@ export class ClientListingComponent implements OnInit {
     this.getClients();
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(FormDialogComponent, {
+  openDialog(clientId: string): void {
+    const options = {
       width: '400px',
       height: '350px',
-    });
+      data: {}
+    }
+    if(clientId){
+      options.data = {clientId: clientId}
+    }
+    const dialogRef = this.dialog.open(FormDialogComponent, options);
+
     dialogRef.afterClosed().subscribe(
       (result) => {
         if (!result) {
@@ -44,6 +50,10 @@ export class ClientListingComponent implements OnInit {
       },
       (err) => this.errorHandler(err, 'Failed to create Client')
     );
+  }
+
+  deleteBtnHandler(clientId: any){
+    console.log(clientId)
   }
 
   // get all clients form server side

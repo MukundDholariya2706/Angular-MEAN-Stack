@@ -20,4 +20,7 @@ export class ClientService {
     return this.http.post<Client>(`${BASE_URL}/clients`, body);
   }
 
+  getClient(id: string): Observable<Client>{
+    return this.http.get<Client>(`${BASE_URL}/clients/${id}`);
+  }
 }
