@@ -5,11 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClientListingComponent } from './components/client-listing/client-listing.component';
+import { FormDialogComponent } from './components/form-dialog/form-dialog.component';
 
 @NgModule({
-  declarations: [ClientListingComponent],
+  declarations: [ClientListingComponent, FormDialogComponent],
   imports: [CommonModule, FormsModule, HttpClientModule, MaterialModule],
   exports: [ClientListingComponent],
   providers: [ClientService],
+  entryComponents: [FormDialogComponent]
 })
 export class ClientsModule {}
