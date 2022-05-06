@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class InvoiceFormComponent implements OnInit {
   invoiceForm!: FormGroup;
   private invoice!: Invoice;
+  editMode = false;
   constructor(
     private fb: FormBuilder,
     private invoiceService: InvoiceService,
@@ -74,6 +75,10 @@ export class InvoiceFormComponent implements OnInit {
     }
   }
 
+  onCancel(){
+    this.router.navigate(['dashboard/invoices']);
+  }
+
   private setInvoiceToForm() {
     this.route.params.subscribe((params) => {
       // console.log('id :>> ', id);
@@ -83,6 +88,7 @@ export class InvoiceFormComponent implements OnInit {
       }
       this.invoiceService.getInvoice(id).subscribe(
         (invoice) => {
+          this.editMode = true;
           this.invoice = invoice;
           this.invoiceForm.patchValue(this.invoice);
         },

@@ -1,5 +1,5 @@
 <mat-card>
-  <h3>Create Invoice</h3>
+  <h3> {{ editMode ? 'Edit' : 'Create' }} Invoice</h3>
   <form
     class="form-container"
     [formGroup]="invoiceForm"
@@ -75,7 +75,7 @@
       >
         Save
       </button>
-      <button mat-raised-button type="reset">Cancel</button>
+      <button mat-raised-button type="reset" (click)="onCancel()">Cancel</button>
     </div>
   </form>
 </mat-card>
