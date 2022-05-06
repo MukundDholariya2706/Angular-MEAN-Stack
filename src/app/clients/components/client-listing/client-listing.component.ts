@@ -19,12 +19,11 @@ export class ClientListingComponent implements OnInit {
     this.getClients();
   }
 
-  saveBtnHandler(){}
 
-  openDialog(): void {
+  openDialog() {
     const dialogRef = this.dialog.open(FormDialogComponent, {
       width: '400px',
-      height: '300px'
+      height: '350px'
       
     })
   }

@@ -1,7 +1,7 @@
 import { ClientService } from './services/client.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './../Shared/material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClientListingComponent } from './components/client-listing/client-listing.component';
@@ -9,7 +9,7 @@ import { FormDialogComponent } from './components/form-dialog/form-dialog.compon
 
 @NgModule({
   declarations: [ClientListingComponent, FormDialogComponent],
-  imports: [CommonModule, FormsModule, HttpClientModule, MaterialModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule,HttpClientModule, MaterialModule],
   exports: [ClientListingComponent],
   providers: [ClientService],
   entryComponents: [FormDialogComponent]
