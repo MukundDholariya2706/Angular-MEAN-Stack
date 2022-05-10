@@ -11,7 +11,7 @@ export class JwtService {
   }
 
   getToken() {
-    window.localStorage.getItem('jwt_token');
+    return window.localStorage.getItem('jwt_token');
   }
 
   destoryToken() {
