@@ -1,3 +1,5 @@
+import { Client } from './../../../clients/models/client';
+import { ClientService } from './../../../clients/services/client.service';
 import { Invoice } from './../../models/invoice';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InvoiceService } from './../../services/invoice.service';
@@ -14,17 +16,21 @@ export class InvoiceFormComponent implements OnInit {
   invoiceForm!: FormGroup;
   private invoice!: Invoice;
   editMode = false;
+  clients: Client[] = [];
+
   constructor(
     private fb: FormBuilder,
     private invoiceService: InvoiceService,
     private _snackBar: MatSnackBar,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private clientService: ClientService
   ) {}
 
   ngOnInit(): void {
     this.createForm();
     this.setInvoiceToForm();
+    this.setClients();
   }
 
   get f() {
@@ -37,6 +43,7 @@ export class InvoiceFormComponent implements OnInit {
       date: ['', Validators.required],
       due: ['', Validators.required],
       qty: ['', Validators.required],
+      client: ['', Validators.required],
       rate: [''],
       tax: [''],
     });
@@ -75,7 +82,7 @@ export class InvoiceFormComponent implements OnInit {
     }
   }
 
-  onCancel(){
+  onCancel() {
     this.router.navigate(['dashboard/invoices']);
   }
 
@@ -102,5 +109,14 @@ export class InvoiceFormComponent implements OnInit {
     this._snackBar.open(message, 'Error', {
       duration: 2000,
     });
+  }
+
+  private setClients() {
+    this.clientService.getClients().subscribe(
+      (clients) => {
+        this.clients = clients;
+      },
+      (err) => this.errorHandler(err, 'Failed to get clients')
+    );
   }
 }

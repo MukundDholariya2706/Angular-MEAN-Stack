@@ -1,5 +1,5 @@
 <mat-card>
-  <h3> {{ editMode ? 'Edit' : 'Create' }} Invoice</h3>
+  <h3>{{ editMode ? "Edit" : "Create" }} Invoice</h3>
   <form
     class="form-container"
     [formGroup]="invoiceForm"
@@ -59,6 +59,17 @@
       >
     </mat-form-field>
 
+    <mat-form-field appearance="fill">
+      <mat-select placeholder="Select Client" formControlName="client">
+        <mat-option *ngFor="let client of clients" [value]="client._id">
+          {{ client.firstName }} {{ client.lastName }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="f['client'].invalid && f['client'].touched"
+        >Client is required</mat-error
+      >
+    </mat-form-field>
+
     <mat-form-field>
       <input matInput placeholder="Rate" type="number" formControlName="rate" />
       <mat-error *ngIf="f['rate'].invalid && f['rate'].touched"
@@ -75,7 +86,9 @@
       >
         Save
       </button>
-      <button mat-raised-button type="reset" (click)="onCancel()">Cancel</button>
+      <button mat-raised-button type="reset" (click)="onCancel()">
+        Cancel
+      </button>
     </div>
   </form>
 </mat-card>
