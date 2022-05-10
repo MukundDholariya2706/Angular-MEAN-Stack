@@ -1,3 +1,4 @@
+import { JwtService } from './../../core/services/jwt.service';
 import { Invoice, InvoicePaginationRsp } from './../models/invoice';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -9,7 +10,7 @@ const BASE_URL = 'http://localhost:3000/api';
   providedIn: 'root',
 })
 export class InvoiceService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private jwtService: JwtService) {}
 
   getInvoices({page, perPage, sortField, sortDir, filter}: any): Observable<InvoicePaginationRsp> {
     let queryString = `${BASE_URL}/invoices?page=${page + 1}&perPage=${perPage}`;

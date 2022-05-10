@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { JwtService } from './../core/services/jwt.service';
 import { AuthService } from './../core/services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +12,12 @@ import { Component, OnInit } from '@angular/core';
 export class AuthComponent implements OnInit {
   authForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private jetService: JwtService,
+    private router: Router
+  ) {}
 
   get f() {
     return this.authForm.controls;
@@ -24,6 +31,8 @@ export class AuthComponent implements OnInit {
     this.authService.login(this.authForm.value).subscribe(
       (data) => {
         console.log('data :>> ', data);
+        this.jetService.setToken(data.token);
+        this.router.navigate(['/dashbord/invoices']);
       },
       (err) => console.error(err)
     );
