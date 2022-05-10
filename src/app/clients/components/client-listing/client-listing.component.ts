@@ -31,29 +31,49 @@ export class ClientListingComponent implements OnInit {
     const options = {
       width: '400px',
       height: '350px',
-      data: {}
-    }
-    if(clientId){
-      options.data = {clientId: clientId}
+      data: {},
+    };
+    if (clientId) {
+      options.data = { clientId: clientId };
     }
     const dialogRef = this.dialog.open(FormDialogComponent, options);
 
-    dialogRef.afterClosed().subscribe(
-      (result) => {
-        if (!result) {
-          return;
-        }
-        this.clientService.createClient(result).subscribe((data) => {
-          this.getClients();
-          this._snackBar.open('Created Client!', 'Success', { duration: 2000 });
-        });
-      },
-      (err) => this.errorHandler(err, 'Failed to create Client')
-    );
+    dialogRef.afterClosed().subscribe((result) => {
+      //when data is empty
+      if (!result) {
+        return;
+      }
+      //when client is in edit mode
+      if (clientId) {
+        this.clientService.updateClient(clientId, result).subscribe(
+          () => {
+            this.getClients();
+            this._snackBar.open('Updated CLient!', 'Success', {
+              duration: 2000,
+            });
+          },
+          (err) => {
+            this.errorHandler(err, 'Failed to update Client');
+          }
+        );
+      }
+      //when client is in create mode
+      else {
+        this.clientService.createClient(result).subscribe(
+          () => {
+            this.getClients();
+            this._snackBar.open('Created Client!', 'Success', {
+              duration: 2000,
+            });
+          },
+          (err) => this.errorHandler(err, 'Failed to create Client')
+        );
+      }
+    });
   }
 
-  deleteBtnHandler(clientId: any){
-    console.log(clientId)
+  deleteBtnHandler(clientId: any) {
+    console.log(clientId);
   }
 
   // get all clients form server side
@@ -63,7 +83,7 @@ export class ClientListingComponent implements OnInit {
         this.dataSource.data = data;
       },
       (err) => console.error(err),
-      () => this.resultLoadding = false
+      () => (this.resultLoadding = false)
     );
   }
 

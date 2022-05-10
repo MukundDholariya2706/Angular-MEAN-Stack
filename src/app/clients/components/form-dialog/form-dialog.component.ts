@@ -12,6 +12,7 @@ import { Client } from '../../models/client';
 })
 export class FormDialogComponent implements OnInit {
   clientForm!: FormGroup;
+  title = 'New Client';
   constructor(
     public dialogRef: MatDialogRef<FormDialogComponent>,
     private fb: FormBuilder,
@@ -36,6 +37,7 @@ export class FormDialogComponent implements OnInit {
   }
 
   private setClientToForm(clientId: any){
+    this.title = 'Edit Client'
     this.clientService.getClient(clientId).subscribe(client => {
       this.clientForm.patchValue(client);
     }, err => this.errorHandler(err, "Fail to load client"));
