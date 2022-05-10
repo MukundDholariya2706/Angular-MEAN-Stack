@@ -6,6 +6,7 @@ import { ClientService } from './../../services/client.service';
 import { Component, OnInit } from '@angular/core';
 import { FormDialogComponent } from '../form-dialog/form-dialog.component';
 import 'rxjs';
+import { remove } from 'lodash';
 @Component({
   selector: 'app-client-listing',
   templateUrl: './client-listing.component.html',
@@ -72,8 +73,33 @@ export class ClientListingComponent implements OnInit {
     });
   }
 
+  // delete client by id
+  // deleteBtnHandler(clientId: any) {
+  //   this.clientService.deleteClient(clientId).subscribe(
+  //     (data) => {
+  //       this._snackBar.open('Client deleted', 'Success', { duration: 2000 });
+  //       this.getClients();
+  //     },
+  //     (err) => {
+  //       this.errorHandler(err, 'Failed to delete client');
+  //     }
+  //   );
+  // }
+
+  // delete client by id using lodash
   deleteBtnHandler(clientId: any) {
-    console.log(clientId);
+    this.clientService.deleteClient(clientId).subscribe(
+      (data) => {
+        const removedItems = remove(this.dataSource.data, (item) => {
+          return item._id === data._id;
+        });
+        this.dataSource.data = [...this.dataSource.data];
+        this._snackBar.open('Client deleted', 'Success', {
+          duration: 2000,
+        });
+      },
+      (err) => this.errorHandler(err, 'Failed do delete client')
+    );
   }
 
   // get all clients form server side
