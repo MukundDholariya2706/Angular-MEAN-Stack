@@ -1,3 +1,4 @@
+import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,6 +16,7 @@ import { MaterialModule } from './Shared/material.module';
     BrowserAnimationsModule,
     MaterialModule,
     AuthModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent],

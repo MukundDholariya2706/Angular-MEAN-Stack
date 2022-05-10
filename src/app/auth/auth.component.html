@@ -3,7 +3,7 @@
     <mat-card>
       <mat-card-title>Login</mat-card-title>
       <mat-card-content>
-        <form class="form-container" [formGroup]="authForm" novalidate>
+        <form class="form-container" [formGroup]="authForm" novalidate (ngSubmit)="onSubmit()">
           <mat-form-field>
             <input matInput placeholder="Email" formControlName="email" />
             <mat-error *ngIf="f['email'].invalid && f['email'].touched"
@@ -12,7 +12,7 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput placeholder="Password" formControlName="password" />
+            <input matInput type="password" placeholder="Password" formControlName="password" />
             <mat-error *ngIf="f['password'].invalid && f['password'].touched"
               >Password is required</mat-error
             >
@@ -20,7 +20,7 @@
 
           <div>
             <button mat-raised-button type="submit" [disabled]="!authForm.valid" color="primary">
-              Save
+              Login
             </button>
           </div>
         </form>

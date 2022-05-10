@@ -1,3 +1,4 @@
+import { AuthService } from './../core/services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class AuthComponent implements OnInit {
   authForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   get f() {
     return this.authForm.controls;
@@ -19,7 +20,16 @@ export class AuthComponent implements OnInit {
     this.createForm();
   }
 
-  createForm() {
+  onSubmit() {
+    this.authService.login(this.authForm.value).subscribe(
+      (data) => {
+        console.log('data :>> ', data);
+      },
+      (err) => console.error(err)
+    );
+  }
+
+  private createForm() {
     this.authForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],

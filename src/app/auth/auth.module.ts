@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './../Shared/material.module';
 import { NgModule } from '@angular/core';
@@ -14,7 +15,7 @@ import { AuthComponent } from './auth.component';
     CommonModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class AuthModule { }
