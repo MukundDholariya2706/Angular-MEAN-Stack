@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class AuthComponent implements OnInit {
   authForm!: FormGroup;
   title = '';
+  resultLoadding = false;
 
   constructor(
     private fb: FormBuilder,
@@ -33,22 +34,25 @@ export class AuthComponent implements OnInit {
 
   onSubmit() {
     if (this.title === 'Signup') {
-      console.log('Signup Process');
+      this.resultLoadding = true;
       this.authService.signup(this.authForm.value).subscribe(
         (data) => {
           this.router.navigate(['/login']);
-          this._snackBar.open('Signup Successfully!', 'Success');
+          this._snackBar.open('Signup Successfully!', 'Success', {duration: 2000});
         },
-        (err) => this.errorHandler(err, 'Opps, something went worng')
+        (err) => this.errorHandler(err, 'Opps, something went worng'),
+        () => this.resultLoadding = false
       );
     } else {
       this.authService.login(this.authForm.value).subscribe(
         (data) => {
+          this.resultLoadding = true;
           console.log('data :>> ', data);
           this.jetService.setToken(data.token);
           this.router.navigate(['/dashbord/invoices']);
         },
-        (err) => this.errorHandler(err, 'Opps, something went worng')
+        (err) => this.errorHandler(err, 'Opps, something went worng'),
+        () => this.resultLoadding = false
       );
     }
   }
@@ -61,6 +65,7 @@ export class AuthComponent implements OnInit {
   }
 
   private errorHandler(error: any, message: any) {
+    this.resultLoadding = false;
     console.error(error);
     this._snackBar.open(message, 'Error', {
       duration: 2000,
