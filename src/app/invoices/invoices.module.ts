@@ -1,3 +1,4 @@
+import { EditInvoiceResolverService } from './services/edit-invoice-resolver.service';
 import { InvoiceService } from './services/invoice.service';
 import { MaterialModule } from './../Shared/material.module';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,6 @@ import { InvoiceFormComponent } from './components/invoice-form/invoice-form.com
     ReactiveFormsModule,
   ],
   exports: [InvoiceListingComponent, InvoiceFormComponent],
-  providers: [InvoiceService],
+  providers: [InvoiceService, EditInvoiceResolverService],
 })
 export class InvoicesModule {}

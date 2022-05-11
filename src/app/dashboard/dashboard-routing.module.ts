@@ -5,6 +5,7 @@ import { InvoiceListingComponent } from './../invoices/components/invoice-listin
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
+import { EditInvoiceResolverService } from '../invoices/services/edit-invoice-resolver.service';
 
 const routes: Routes = [
   {
@@ -26,6 +27,9 @@ const routes: Routes = [
         path: 'invoices/:id',
         component: InvoiceFormComponent,
         canActivateChild: [AuthGuardService],
+        resolve: {
+          invoice: EditInvoiceResolverService
+        }
       },
       {
         path: 'clients',

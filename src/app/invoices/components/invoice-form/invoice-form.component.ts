@@ -101,7 +101,11 @@ export class InvoiceFormComponent implements OnInit {
         },
         (err) => this.errorHandler(err, 'Failed to get Invoice')
       );
-    });
+      this.route.data.subscribe((data) => {
+        console.log('data1 :>> ', data);
+        
+      })
+    })
   }
 
   private errorHandler(error: any, message: string) {
