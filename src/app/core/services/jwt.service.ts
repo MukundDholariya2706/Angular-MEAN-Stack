@@ -17,4 +17,8 @@ export class JwtService {
   destoryToken() {
     return window.localStorage.removeItem('jwt_token');
   }
+
+  isAuth(): boolean{
+    return !!localStorage.getItem('jwt_token')
+  }
 }

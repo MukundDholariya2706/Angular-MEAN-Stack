@@ -1,3 +1,4 @@
+import { NoAuthGuardService } from './core/services/no-auth-guard.service';
 import { AuthComponent } from './auth/auth.component';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
@@ -7,10 +8,12 @@ const routes: Routes = [
   {
     path: 'login',
     component: AuthComponent,
+    canActivate: [NoAuthGuardService],
   },
   {
     path: 'signup',
     component: AuthComponent,
+    canActivate: [NoAuthGuardService],
   },
   {
     path: '',

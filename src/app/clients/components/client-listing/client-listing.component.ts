@@ -108,13 +108,14 @@ export class ClientListingComponent implements OnInit {
       (data) => {
         this.dataSource.data = data;
       },
-      (err) => console.error(err),
+      (err) => this.errorHandler(err, 'Ops!, something went to wrong'),
       () => (this.resultLoadding = false)
     );
   }
 
   //error handler
   private errorHandler(error: any, message: string) {
+    this.resultLoadding = false;
     console.error(error);
     this._snackBar.open(message, 'Error', {
       duration: 2000,
