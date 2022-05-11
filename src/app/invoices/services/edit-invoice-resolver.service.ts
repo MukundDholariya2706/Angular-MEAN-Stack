@@ -17,7 +17,6 @@ export class EditInvoiceResolverService implements Resolve<Invoice> {
         take(1),
         map(invoice => {
           if (invoice) {
-            debugger
             return invoice;
           }
           else {
