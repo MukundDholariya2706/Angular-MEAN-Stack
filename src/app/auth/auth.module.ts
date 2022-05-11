@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './../Shared/material.module';
@@ -16,6 +17,7 @@ import { AuthComponent } from './auth.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class AuthModule { }

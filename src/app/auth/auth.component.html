@@ -1,30 +1,39 @@
 <div class="limiter">
-  <div class="container-login">
-    <mat-card>
-      <mat-card-title>Login</mat-card-title>
-      <mat-card-content>
-        <form class="form-container" [formGroup]="authForm" novalidate (ngSubmit)="onSubmit()">
-          <mat-form-field>
-            <input matInput placeholder="Email" formControlName="email" />
-            <mat-error *ngIf="f['email'].invalid && f['email'].touched"
-              >Email is required</mat-error
-            >
-          </mat-form-field>
+    <div class="container-login">
+        <mat-card>
+            <mat-card-title>{{ title }}</mat-card-title>
+            <mat-card-content>
+                <form class="form-container" [formGroup]="authForm" novalidate (ngSubmit)="onSubmit()">
+                    <mat-form-field>
+                        <input matInput placeholder="Email" formControlName="email" />
+                        <mat-error *ngIf="f['email'].invalid && f['email'].touched">Email is required</mat-error>
+                    </mat-form-field>
 
-          <mat-form-field>
-            <input matInput type="password" placeholder="Password" formControlName="password" />
-            <mat-error *ngIf="f['password'].invalid && f['password'].touched"
-              >Password is required</mat-error
-            >
-          </mat-form-field>
+                    <mat-form-field>
+                        <input matInput type="password" placeholder="Password" formControlName="password" />
+                        <mat-error *ngIf="f['password'].invalid && f['password'].touched">Password is required
+                        </mat-error>
+                    </mat-form-field>
 
-          <div>
-            <button mat-raised-button type="submit" [disabled]="!authForm.valid" color="primary">
-              Login
-            </button>
-          </div>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
+                    <div>
+                        <button mat-raised-button type="submit"  color="primary">
+                            {{ title }}
+                        </button>
+                    </div>
+                </form>
+            </mat-card-content>
+            <div class="alternative" *ngIf="title === 'Login'">
+                    <p>Don't have an account?</p>
+                    <button mat-raised-button color="primary" type="button" [routerLink]="['/signup']">
+                        Signup
+                    </button>
+            </div>
+            <div class="alternative" *ngIf="title === 'Signup'">
+                <p>Already have an account?</p>
+                <button mat-raised-button color="primary" type="button" [routerLink]="['/login']">
+                    Login
+                </button>
+        </div>
+        </mat-card>
+    </div>
 </div>

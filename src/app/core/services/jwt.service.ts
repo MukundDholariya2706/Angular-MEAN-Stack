@@ -7,7 +7,7 @@ export class JwtService {
   constructor() {}
 
   setToken(token: string) {
-    window.localStorage.setItem('jwt_token', token);
+    return window.localStorage.setItem('jwt_token', token);
   }
 
   getToken() {
@@ -15,6 +15,6 @@ export class JwtService {
   }
 
   destoryToken() {
-    window.localStorage.removeItem('jwt_token');
+    return window.localStorage.removeItem('jwt_token');
   }
 }

@@ -1,12 +1,10 @@
 // set token to header part of api when it called
 import {
-  HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { JwtService } from './jwt.service';
 
 @Injectable({

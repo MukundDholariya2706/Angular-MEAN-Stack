@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { JwtService } from './../core/services/jwt.service';
 import { AuthService } from './../core/services/auth.service';
@@ -11,12 +12,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthComponent implements OnInit {
   authForm!: FormGroup;
+  title = '';
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private jetService: JwtService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {}
 
   get f() {
@@ -25,23 +28,42 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    this.title = this.router.url === '/login' ? 'Login' : 'Signup';
   }
 
   onSubmit() {
-    this.authService.login(this.authForm.value).subscribe(
-      (data) => {
-        console.log('data :>> ', data);
-        this.jetService.setToken(data.token);
-        this.router.navigate(['/dashbord/invoices']);
-      },
-      (err) => console.error(err)
-    );
+    if (this.title === 'Signup') {
+      console.log('Signup Process');
+      this.authService.signup(this.authForm.value).subscribe(
+        (data) => {
+          this.router.navigate(['/login']);
+          this._snackBar.open('Signup Successfully!', 'Success');
+        },
+        (err) => this.errorHandler(err, 'Opps, something went worng')
+      );
+    } else {
+      this.authService.login(this.authForm.value).subscribe(
+        (data) => {
+          console.log('data :>> ', data);
+          this.jetService.setToken(data.token);
+          this.router.navigate(['/dashbord/invoices']);
+        },
+        (err) => this.errorHandler(err, 'Opps, something went worng')
+      );
+    }
   }
 
   private createForm() {
     this.authForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
+    });
+  }
+
+  private errorHandler(error: any, message: any) {
+    console.error(error);
+    this._snackBar.open(message, 'Error', {
+      duration: 2000,
     });
   }
 }
