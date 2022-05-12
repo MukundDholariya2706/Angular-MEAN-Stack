@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { User, LoginRes, SignupRes } from './../models/user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -15,6 +15,26 @@ export class AuthService {
   }
 
   signup(body: User): Observable<SignupRes> {
-    return this.http.post<SignupRes>(`${environment.api_url}/users/signup`, body);
+    return this.http.post<SignupRes>(
+      `${environment.api_url}/users/signup`,
+      body
+    );
+  }
+
+  googleAuth(): Observable<LoginRes> {
+    return this.http.get<LoginRes>(`${environment.api_url}/auth/google`);
+  }
+
+  isAuthenticated(token: any): Observable<boolean> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}`,
+      }),
+    };
+    return this.http.get<boolean>(
+      `${environment.api_url}/auth/authenticate`,
+      httpOptions
+    );
   }
 }

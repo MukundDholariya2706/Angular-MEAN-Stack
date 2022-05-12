@@ -32,16 +32,27 @@ export class AuthComponent implements OnInit {
     this.title = this.router.url === '/login' ? 'Login' : 'Signup';
   }
 
+  googleAuthHanler() {
+    this.authService.googleAuth().subscribe(
+      (data) => {
+        console.log('data :>> ', data);
+      },
+      (err) => this.errorHandler(err, 'Opps, somthing went worng')
+    );
+  }
+
   onSubmit() {
     if (this.title === 'Signup') {
       this.resultLoadding = true;
       this.authService.signup(this.authForm.value).subscribe(
         (data) => {
           this.router.navigate(['/login']);
-          this._snackBar.open('Signup Successfully!', 'Success', {duration: 2000});
+          this._snackBar.open('Signup Successfully!', 'Success', {
+            duration: 2000,
+          });
         },
         (err) => this.errorHandler(err, 'Opps, something went worng'),
-        () => this.resultLoadding = false
+        () => (this.resultLoadding = false)
       );
     } else {
       this.authService.login(this.authForm.value).subscribe(
@@ -52,7 +63,7 @@ export class AuthComponent implements OnInit {
           this.router.navigate(['/dashbord/invoices']);
         },
         (err) => this.errorHandler(err, 'Opps, something went worng'),
-        () => this.resultLoadding = false
+        () => (this.resultLoadding = false)
       );
     }
   }
