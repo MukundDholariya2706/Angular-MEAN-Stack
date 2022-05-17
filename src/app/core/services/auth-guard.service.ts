@@ -42,11 +42,12 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
       //   this.router.navigate(['/login']);
       //   return of(false);
       // });
-      debugger
+
       return this.authService.isAuthenticated(token).pipe(
         map((authenticated) => {
           if (authenticated === true) {
             this.jwtService.setToken(token);
+            this.router.navigate(['/dashboard/invoices']);
             return true;
           }
           this.router.navigate(['/login']);

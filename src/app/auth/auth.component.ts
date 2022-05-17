@@ -58,7 +58,6 @@ export class AuthComponent implements OnInit {
       this.authService.login(this.authForm.value).subscribe(
         (data) => {
           this.resultLoadding = true;
-          console.log('data :>> ', data);
           this.jetService.setToken(data.token);
           this.router.navigate(['/dashbord/invoices']);
         },

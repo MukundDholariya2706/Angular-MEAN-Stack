@@ -10,6 +10,10 @@ export interface LoginRes {
 }
 
 export interface SignupRes {
-    success: boolean;
-    message: string;
+  success: boolean;
+  message: string;
+}
+
+export interface LogoutRes {
+  success: true;
 }

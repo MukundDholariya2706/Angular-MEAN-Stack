@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
 import { NgModule } from '@angular/core';
@@ -16,7 +17,8 @@ import { MaterialModule } from './Shared/material.module';
     BrowserAnimationsModule,
     MaterialModule,
     AuthModule,
-    CoreModule
+    CoreModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
