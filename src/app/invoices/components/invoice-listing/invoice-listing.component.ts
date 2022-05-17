@@ -23,9 +23,6 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
     'item',
     'date',
     'due',
-    'qty',
-    'rate',
-    'tax',
     'action',
   ];
   dataSource = new MatTableDataSource<Invoice>();

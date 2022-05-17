@@ -1,3 +1,5 @@
+import { Invoice } from './../../models/invoice';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InvoiceViewComponent implements OnInit {
 
-  constructor() { }
+  invoice!: Invoice
+  constructor(private router: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.router.data.subscribe((invoice) => {
+      this.invoice = invoice['invoice']
+    })
   }
 
+  
 }

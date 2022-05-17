@@ -28,7 +28,10 @@ const routes: Routes = [
         path: 'invoices/:id/view',
         component: InvoiceViewComponent,
         canActivateChild: [AuthGuardService],
-      },
+        resolve: {
+          invoice: EditInvoiceResolverService
+        }
+      },  
       {
         path: 'invoices/:id',
         component: InvoiceFormComponent,
