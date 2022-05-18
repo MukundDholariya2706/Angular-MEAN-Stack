@@ -41,4 +41,11 @@ export class AuthService {
   logout(): Observable<LogoutRes> {
     return this.http.get<LogoutRes>(`${environment.api_url}/auth/logout`);
   }
+
+  forgotPassword(data: { email: string }): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(
+      `${environment.api_url}/users/forgot-password`,
+      data
+    );
+  }
 }
