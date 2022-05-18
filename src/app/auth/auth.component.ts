@@ -70,6 +70,10 @@ export class AuthComponent implements OnInit {
     }
   }
 
+  forgotPassWord(){
+    this.router.navigate(['/forgot-password']);
+  }
+
   private createForm() {
     this.authForm = this.fb.group({
       email: ['', Validators.required],
