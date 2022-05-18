@@ -32,12 +32,12 @@
             </tr>
             <tr>
                 <td class="column-title">Total:</td>
-                <td>$100</td>
+                <td>${{ total }}</td>
             </tr>
         </table>
     </mat-card-content>
     <mat-card-actions>
         <button mat-flat-button color="primary" [routerLink]="['/dashboard','invoices',invoice._id]">Edit</button>
-        <button mat-flat-button >Download</button>
+        <button mat-flat-button (click)="downloadHandler(invoice._id)">Download</button>
     </mat-card-actions>
 </mat-card>

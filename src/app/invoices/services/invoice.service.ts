@@ -38,4 +38,10 @@ export class InvoiceService {
   updateInvoice( id: string , body: Invoice) {
     return this.http.put<Invoice>(`${BASE_URL}/invoices/${id}`, body);
   }
+
+  downloadInvoice(id:string){
+    return this.http.get(`${BASE_URL}/invoices/${id}/download`,{
+      responseType: 'blob' //response type is used to read binary data
+    });
+  }
 }
