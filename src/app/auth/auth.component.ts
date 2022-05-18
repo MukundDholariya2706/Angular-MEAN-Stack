@@ -1,3 +1,4 @@
+import { User } from './../core/models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { JwtService } from './../core/services/jwt.service';
@@ -55,7 +56,9 @@ export class AuthComponent implements OnInit {
         () => (this.resultLoadding = false)
       );
     } else {
-      this.authService.login(this.authForm.value).subscribe(
+      let {email, password} = this.authForm.value;
+      let user: User = {email, password}
+      this.authService.login(user).subscribe(
         (data) => {
           this.resultLoadding = true;
           this.jetService.setToken(data.token);
@@ -71,6 +74,7 @@ export class AuthComponent implements OnInit {
     this.authForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
+      name: [''],
     });
   }
 

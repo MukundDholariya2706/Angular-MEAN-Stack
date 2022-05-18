@@ -36,6 +36,7 @@
             </tr>
         </table>
     </mat-card-content>
+    <mat-progress-bar *ngIf="isResultsLoading" mode="indeterminate"></mat-progress-bar>
     <mat-card-actions>
         <button mat-flat-button color="primary" [routerLink]="['/dashboard','invoices',invoice._id]">Edit</button>
         <button mat-flat-button (click)="downloadHandler(invoice._id)">Download</button>

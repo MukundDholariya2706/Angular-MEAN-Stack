@@ -13,6 +13,8 @@ export class InvoiceViewComponent implements OnInit {
 
   invoice!: Invoice;
   total!: number;
+  isResultsLoading = false;
+
   constructor(private router: ActivatedRoute, private invoiceService: InvoiceService) { }
 
   ngOnInit(): void {
@@ -30,12 +32,14 @@ export class InvoiceViewComponent implements OnInit {
   }
 
   downloadHandler(invoiceId: string){
+    this.isResultsLoading = true;
     this.invoiceService.downloadInvoice(invoiceId).subscribe(data => {
       console.log(data);
       saveAs(data, this.invoice.item);
     }, err => {
       console.error(err);
-    });
+    },
+    ()=>{ this.isResultsLoading = false});
   }
 
   
