@@ -104,7 +104,18 @@ export class InvoiceFormComponent implements OnInit {
 
       this.route.data.subscribe((data) => {
         this.invoice = data['invoice'];
-        this.invoiceForm.patchValue(this.invoice)        
+
+        if(this.invoice.client){
+          this.invoiceForm.patchValue({client: this.invoice.client._id});
+        }
+        this.invoiceForm.patchValue({
+          item: this.invoice.item,
+          qty: this.invoice.qty,
+          date: this.invoice.date,
+          due: this.invoice.due,
+          rate: this.invoice.rate,
+          tax: this.invoice.tax,
+        });        
       })
     })
   }
