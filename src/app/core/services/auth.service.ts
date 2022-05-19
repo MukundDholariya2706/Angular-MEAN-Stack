@@ -48,4 +48,19 @@ export class AuthService {
       data
     );
   }
+
+  resetPassword(body: any): Observable<{ success: boolean }> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${body.token}`,
+      }),
+    };
+
+    return this.http.put<{ success: boolean }>(
+      `${environment.api_url}/users/reset-password`,
+      { password: body.password },
+      httpOptions
+    );
+  }
 }
